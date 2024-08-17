@@ -9,10 +9,11 @@ public class Ball : MonoBehaviour
     public float speedPercentage;
     public Vector2 initialPosition;
 
+    
+
     void Start()
     {
         initialPosition = new Vector2(transform.position.x, transform.position.y);
-        // RandomInitialDirection();
         Reset();
     }
 
@@ -41,7 +42,6 @@ public class Ball : MonoBehaviour
         transform.position = initialPosition;
         direction = Vector2.zero;
     }
-
 
     private void RandomInitialDirection()
     {
