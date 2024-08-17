@@ -3,22 +3,45 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     public Vector2 direction;
-    public float speed;
+    public float baseSpeed;
+    public float limitSpeed;
+    public float currentSpeed;
+    public float speedPercentage;
+    public Vector2 initialPosition;
 
     void Start()
     {
-        RandomInitialDirection();
+        initialPosition = new Vector2(transform.position.x, transform.position.y);
+        // RandomInitialDirection();
+        Reset();
     }
 
     void Update()
     {
         Move();
+
+        if(Input.GetKeyDown(KeyCode.Space)) RandomInitialDirection();
+        if(Input.GetKeyDown(KeyCode.R)) Reset();
     }
 
     private void Move()
     {
-        transform.Translate(direction*speed*Time.deltaTime, 0);
+        transform.Translate(direction*currentSpeed*Time.deltaTime, 0);
     }
+
+    private void UpSpeed()
+    {
+        if (currentSpeed < limitSpeed) currentSpeed *= speedPercentage;
+        else currentSpeed = limitSpeed;
+    }
+
+    public void Reset()
+    {
+        currentSpeed = baseSpeed;
+        transform.position = initialPosition;
+        direction = Vector2.zero;
+    }
+
 
     private void RandomInitialDirection()
     {
@@ -54,6 +77,8 @@ public class Ball : MonoBehaviour
             default:
                 break;
         }
+
+        UpSpeed();
     }
 
     private Vector2 ReflectDirection(Vector2 _direction, Vector2 _normal)
