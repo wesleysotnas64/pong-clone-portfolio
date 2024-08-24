@@ -15,6 +15,7 @@ public class MenuController : MonoBehaviour
 
     void Start()
     {
+        transform.position = menuTransform[1].position+offset;
         activeMenu = new List<bool>();
         activeMenu.Add(false);
         activeMenu.Add(true);
@@ -37,7 +38,7 @@ public class MenuController : MonoBehaviour
         CallTranslateFromTo(1, 0);
     }
 
-    public void IntoToMenu()
+    public void InfoToMenu()
     {
         CallTranslateFromTo(0, 1);
     }
