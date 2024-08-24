@@ -38,7 +38,7 @@ public class PointsControll : MonoBehaviour
     public void UpPointsPlayer1()
     {
         pointsPlayer1++;
-        txtPointsPlayer1.text = $"Player 1: {pointsPlayer1}";
+        txtPointsPlayer1.text = $"{pointsPlayer1}";
         ballGameObject.GetComponent<Ball>().Reset();
         isPoint = false;
     }
@@ -46,7 +46,7 @@ public class PointsControll : MonoBehaviour
     public void UpPointsPlayer2()
     {
         pointsPlayer2++;
-        txtPointsPlayer2.text = $"Player 2: {pointsPlayer2}";
+        txtPointsPlayer2.text = $"{pointsPlayer2}";
         ballGameObject.GetComponent<Ball>().Reset();
         isPoint = false;
     }
