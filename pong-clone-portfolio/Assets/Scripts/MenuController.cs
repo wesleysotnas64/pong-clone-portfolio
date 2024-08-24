@@ -15,10 +15,11 @@ public class MenuController : MonoBehaviour
 
     void Start()
     {
-        activeMenu[0] = false;
-        activeMenu[1] = true;
-        activeMenu[2] = false;
-        activeMenu[3] = false;
+        activeMenu = new List<bool>();
+        activeMenu.Add(false);
+        activeMenu.Add(true);
+        activeMenu.Add(false);
+        activeMenu.Add(false);
     }
 
     public void MenuToGameplay()
