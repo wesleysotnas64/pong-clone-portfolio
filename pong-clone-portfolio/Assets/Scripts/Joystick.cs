@@ -29,9 +29,11 @@ public class Joystick : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(keyUp)) player.UpMove();
-        if(Input.GetKey(keyDown)) player.DownMove();
-        // if(Input.GetKey(keyThrow)) ;
+        if(player != null)
+        {
+            if(Input.GetKey(keyUp)) player.UpMove();
+            if(Input.GetKey(keyDown)) player.DownMove();
+        }
     }
 
 

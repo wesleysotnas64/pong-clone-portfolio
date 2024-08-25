@@ -35,6 +35,16 @@ public class PointsControll : MonoBehaviour
         VerifyPoint();
     }
 
+    public void ResetPoints()
+    {
+        pointsPlayer1 = 0;
+        pointsPlayer2 = 0;
+        txtPointsPlayer1.text = $"{pointsPlayer1}";
+        txtPointsPlayer2.text = $"{pointsPlayer2}";
+        ballGameObject.GetComponent<Ball>().Reset();
+        isPoint = false;
+    }
+
     public void UpPointsPlayer1()
     {
         pointsPlayer1++;
