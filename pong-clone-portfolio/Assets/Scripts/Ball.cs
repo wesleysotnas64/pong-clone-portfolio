@@ -8,7 +8,7 @@ public class Ball : MonoBehaviour
     public float currentSpeed;
     public float speedPercentage;
     public Vector2 initialPosition;
-
+    public bool idle;
     
 
     void Start()
@@ -21,8 +21,8 @@ public class Ball : MonoBehaviour
     {
         Move();
 
-        if(Input.GetKeyDown(KeyCode.Space)) RandomInitialDirection();
-        if(Input.GetKeyDown(KeyCode.R)) Reset();
+        if(Input.GetKeyDown(KeyCode.Space) && idle) RandomInitialDirection();
+        // if(Input.GetKeyDown(KeyCode.R)) Reset();
     }
 
     private void Move()
@@ -41,6 +41,7 @@ public class Ball : MonoBehaviour
         currentSpeed = baseSpeed;
         transform.position = initialPosition;
         direction = Vector2.zero;
+        idle = true;
     }
 
     private void RandomInitialDirection()
@@ -52,6 +53,8 @@ public class Ball : MonoBehaviour
             direction = direction.normalized;
 
         } while (IsInvalidDirection(direction));
+
+        idle = false;
     }
 
     private bool IsInvalidDirection(Vector2 direction)
@@ -68,6 +71,7 @@ public class Ball : MonoBehaviour
         {
             case "Player":
                 direction = ReflectDirection(direction.normalized, col.gameObject.transform.right);
+                UpSpeed();
                 break;
             
             case "Wall":
@@ -77,8 +81,6 @@ public class Ball : MonoBehaviour
             default:
                 break;
         }
-
-        UpSpeed();
     }
 
     private Vector2 ReflectDirection(Vector2 _direction, Vector2 _normal)
