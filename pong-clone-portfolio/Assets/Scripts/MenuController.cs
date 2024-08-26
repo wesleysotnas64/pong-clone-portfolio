@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class MenuController : MonoBehaviour
 {
@@ -16,11 +17,13 @@ public class MenuController : MonoBehaviour
     void Start()
     {
         transform.position = menuTransform[1].position+offset;
-        activeMenu = new List<bool>();
-        activeMenu.Add(false);
-        activeMenu.Add(true);
-        activeMenu.Add(false);
-        activeMenu.Add(false);
+        activeMenu = new List<bool>
+        {
+            false,
+            true,
+            false,
+            false
+        };
     }
 
     public void MenuToGameplay()
@@ -57,6 +60,7 @@ public class MenuController : MonoBehaviour
 
     public void CallTranslateFromTo(int a, int b)
     {
+        EventSystem.current.SetSelectedGameObject(null);
         from = a;
         to = b;
         if (activeMenu[from])
