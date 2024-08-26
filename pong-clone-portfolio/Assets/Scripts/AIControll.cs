@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class AIControll : MonoBehaviour
 {
@@ -33,7 +34,6 @@ public class AIControll : MonoBehaviour
     {
         if(isAI)
         {
-            
             if(ball.position.y > player2Transform.position.y) player2Move.UpMove();
             if(ball.position.y < player2Transform.position.y) player2Move.DownMove();
         }
@@ -46,6 +46,8 @@ public class AIControll : MonoBehaviour
 
         btnAIImage.color = new Color(1, 1, 1, 1.0f);
         btnP2Image.color = new Color(1, 1, 1, 0.1f);
+
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void SetAsP2()
@@ -54,5 +56,7 @@ public class AIControll : MonoBehaviour
         player2Joystick.player = player2Move;
         btnAIImage.color = new Color(1, 1, 1, 0.1f);
         btnP2Image.color = new Color(1, 1, 1, 1.0f);
+
+        EventSystem.current.SetSelectedGameObject(null);
     }
 }

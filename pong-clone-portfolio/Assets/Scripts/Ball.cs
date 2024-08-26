@@ -14,19 +14,27 @@ public class Ball : MonoBehaviour
     public List<int> directionsToPlayer1Bounce;
     public List<int> directionsToPlayer2Bounce;
     
+    public SoundEffectController soundEffectController;
 
     void Start()
     {
         initialPosition = new Vector2(transform.position.x, transform.position.y);
         InitInitialDirections();
         Reset();
+
+        soundEffectController = GameObject.Find("SoundEffectControll").GetComponent<SoundEffectController>();
     }
 
     void Update()
     {
         Move();
 
-        if(Input.GetKeyDown(KeyCode.Space) && idle) RandomInitialDirection();
+        if(Input.GetKeyDown(KeyCode.Space) &&
+            idle &&
+            GameObject.Find("Main Camera").GetComponent<MenuController>().activeMenu[3])
+        {
+            RandomInitialDirection();
+        }
     }
 
     private void Move()
@@ -70,11 +78,17 @@ public class Ball : MonoBehaviour
                 {
                     direction = initialDirections[directionsToPlayer2Bounce[Random.Range(0, directionsToPlayer2Bounce.Count)]];
                 }
+
                 UpSpeed();
+
+                soundEffectController.PlayAudio(0);
+
                 break;
             
             case "Wall":
                 direction = ReflectDirection(direction.normalized, col.gameObject.transform.up);
+
+                soundEffectController.PlayAudio(1);
                 break;
 
             default:

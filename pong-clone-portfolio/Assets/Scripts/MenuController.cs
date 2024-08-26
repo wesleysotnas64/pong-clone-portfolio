@@ -36,6 +36,8 @@ public class MenuController : MonoBehaviour
     public void GameplayToMenu()
     {
         CallTranslateFromTo(3, 1);
+        GameObject.Find("PointsControll").GetComponent<PointsControll>().ResetPoints();
+        GameObject.Find("AIControll").GetComponent<AIControll>().SetAsP2();
     }
 
     public void MenuToInfo()

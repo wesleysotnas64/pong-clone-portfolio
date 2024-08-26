@@ -18,6 +18,8 @@ public class PointsControll : MonoBehaviour
     public GameObject ballGameObject;
     public bool isPoint;
 
+    public SoundEffectController soundEffectController;
+
     void Start()
     {
         pointsPlayer1 = 0;
@@ -28,6 +30,8 @@ public class PointsControll : MonoBehaviour
         ballGameObject = GameObject.Find("Ball");
 
         isPoint = false;
+
+        soundEffectController = GameObject.Find("SoundEffectControll").GetComponent<SoundEffectController>();
     }
 
     void Update()
@@ -51,6 +55,7 @@ public class PointsControll : MonoBehaviour
         txtPointsPlayer1.text = $"{pointsPlayer1}";
         ballGameObject.GetComponent<Ball>().Reset();
         isPoint = false;
+        soundEffectController.PlayAudio(2);
     }
 
     public void UpPointsPlayer2()
@@ -59,6 +64,7 @@ public class PointsControll : MonoBehaviour
         txtPointsPlayer2.text = $"{pointsPlayer2}";
         ballGameObject.GetComponent<Ball>().Reset();
         isPoint = false;
+        soundEffectController.PlayAudio(2);
     }
 
     public void VerifyPoint()
@@ -74,6 +80,7 @@ public class PointsControll : MonoBehaviour
                 isPoint = true;
                 UpPointsPlayer1();
             }
+            
         }
     }
 }
