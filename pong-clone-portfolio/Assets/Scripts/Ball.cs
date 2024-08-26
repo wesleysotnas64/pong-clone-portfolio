@@ -11,6 +11,8 @@ public class Ball : MonoBehaviour
     public Vector2 initialPosition;
     public bool idle;
     public List<Vector2> initialDirections;
+    public List<int> directionsToPlayer1Bounce;
+    public List<int> directionsToPlayer2Bounce;
     
 
     void Start()
@@ -25,7 +27,6 @@ public class Ball : MonoBehaviour
         Move();
 
         if(Input.GetKeyDown(KeyCode.Space) && idle) RandomInitialDirection();
-        // if(Input.GetKeyDown(KeyCode.R)) Reset();
     }
 
     private void Move()
@@ -61,7 +62,14 @@ public class Ball : MonoBehaviour
         switch (col.gameObject.tag)
         {
             case "Player":
-                direction = ReflectDirection(direction.normalized, col.gameObject.transform.right);
+                if (direction.x < 0)
+                {
+                    direction = initialDirections[directionsToPlayer1Bounce[Random.Range(0, directionsToPlayer1Bounce.Count)]];
+                }
+                else
+                {
+                    direction = initialDirections[directionsToPlayer2Bounce[Random.Range(0, directionsToPlayer2Bounce.Count)]];
+                }
                 UpSpeed();
                 break;
             
@@ -105,18 +113,28 @@ public class Ball : MonoBehaviour
 
         initialDirections = new List<Vector2>
         {
-            northeast,
-            northwest,
-            southeast,
-            southwest,
-            north_northeast,
-            east_northeast,
-            east_southeast,
-            south_southeast,
-            south_southwest,
-            west_southwest,
-            west_northwest,
-            north_northwest
+            northeast, //0 ->
+            northwest, //1 
+            southeast, //2 ->
+            southwest, //3
+            north_northeast, //4 ->
+            east_northeast,  //5 ->
+            east_southeast,  //6 ->
+            south_southeast, //7 ->
+            south_southwest, //8
+            west_southwest,  //9
+            west_northwest,  //10
+            north_northwest  //11
+        };
+
+        directionsToPlayer1Bounce = new List<int>()
+        {
+            0, 2, 4, 5, 6, 7
+        };
+
+        directionsToPlayer2Bounce = new List<int>()
+        {
+            1, 3, 8, 9, 10, 11
         };
         
     }

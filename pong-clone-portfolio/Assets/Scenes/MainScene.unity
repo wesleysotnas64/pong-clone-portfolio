@@ -2801,10 +2801,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: {x: 0, y: 0}
   baseSpeed: 5
-  limitSpeed: 10
-  currentSpeed: 1
+  limitSpeed: 20
+  currentSpeed: 5
   speedPercentage: 1.1
   initialPosition: {x: 0, y: 0}
+  idle: 0
+  initialDirections: []
+  directionsToPlayer1Bounce: 
+  directionsToPlayer2Bounce: 
 --- !u!61 &1378899903
 BoxCollider2D:
   m_ObjectHideFlags: 0
